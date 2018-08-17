@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Assignment1</string>
+
+    <!--the string value inside the add tracking-->
+    <string name="trackingName">Tracking Name</string>
+    <string name="trackingField">Enter Tracking Name</string>
+    <string name="trackingTargetStartTime">Start Time :</string>
+    <string name="trackingTargetEndTime">End Time :</string>
+    <string name="trackingtTitle">Title :</string>
+    <string name="addButton">Add Tracking</string>
+
+
+    <string name="trackableName">Name :</string>
+    <string name="category">Cagtgory :</string>
+    <string name="description">Description :</string>
+    <string name="url">URL :</string>
+
+
+    <string name="showTrackingList">show Tracking List</string>
+</resources>
