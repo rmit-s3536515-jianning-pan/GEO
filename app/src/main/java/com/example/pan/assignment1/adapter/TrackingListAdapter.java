@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.pan.assignment1.R;
+import com.example.pan.assignment1.controller.OnLongClickToRemoveItem;
 import com.example.pan.assignment1.controller.onTrackingItemClickedListener;
 import com.example.pan.assignment1.model.tracking.Tracking;
 import com.example.pan.assignment1.model.tracking.TrackingManager;
@@ -26,7 +27,7 @@ public class TrackingListAdapter extends RecyclerView.Adapter<TrackingListAdapte
     public static final String name ="Name";
     public static final String sT = "StartTime";
     public static final String eT = "EndTime";
-
+    public static final String ID = "ID";
     public TrackingListAdapter(Context context, List<Tracking> trackingDataset){
         this.context  = context;
         this.trackingDataset = trackingDataset;
@@ -49,8 +50,10 @@ public class TrackingListAdapter extends RecyclerView.Adapter<TrackingListAdapte
         viewHolder.startTime.setText("Start Time:" + sStartTime );
         viewHolder.endTime.setText("End Time:" + sEndTime);
         viewHolder.trackableName.setText("");
-
-        viewHolder.view.setOnClickListener(new onTrackingItemClickedListener(context,t.getTitle(),sStartTime,sEndTime,t.getTrackingId()));
+        System.out.println("Title : " + t.getTitle());
+        System.out.println("Title Id  : " + t.getTrackingId());
+        viewHolder.view.setOnClickListener(new onTrackingItemClickedListener(context,t.getTitle(),sStartTime,sEndTime,t.getTrackingId()));  // pass to the edit tracking activity
+        viewHolder.view.setOnLongClickListener(new OnLongClickToRemoveItem(trackingDataset,t,this)); // long click to remove Itemz
     }
 
 

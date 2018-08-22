@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
         context = this;
         setRecycleView();
         setSpinnerView();
-
     }
 
     public static Context getContext(){ //pass the reference of context to TrackableManager, so it can read the file
@@ -100,7 +99,6 @@ public class MainActivity extends AppCompatActivity {
         adapter = new TrackableListAdapter(this, TrackableManager.findTrackableByCategory(null));
 
         rv.setAdapter(adapter);
-
 
     }
 

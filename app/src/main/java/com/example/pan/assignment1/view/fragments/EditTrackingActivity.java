@@ -3,15 +3,22 @@ package com.example.pan.assignment1.view.fragments;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.pan.assignment1.R;
 import com.example.pan.assignment1.adapter.TrackingListAdapter;
 import com.example.pan.assignment1.controller.OnEditTrackingButtonClickedListener;
+import com.example.pan.assignment1.controller.OnEditViewEndTimeSpinner;
+import com.example.pan.assignment1.controller.onEditViewStartTimeSpinner;
+import com.example.pan.assignment1.controller.onTextChangedListener;
 import com.example.pan.assignment1.model.tracking.Tracking;
 import com.example.pan.assignment1.model.tracking.TrackingManager;
 
@@ -23,6 +30,7 @@ public class EditTrackingActivity extends AppCompatActivity {
     private Button btn;
     private Spinner startTime;
     private Spinner endtime;
+    private onTextChangedListener tw;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,18 +38,32 @@ public class EditTrackingActivity extends AppCompatActivity {
 
        init();
     }
+
     private void init() {
         Intent ref = getIntent();
         String name = ref.getStringExtra(TrackingListAdapter.name);
         String sT = ref.getStringExtra(TrackingListAdapter.sT);
         String eT = ref.getStringExtra(TrackingListAdapter.eT);
         String tId = ref.getStringExtra("ID");
+
+
         text = findViewById(R.id.trackingNameField);
         text.setText(name);
         btn = findViewById(R.id.addBtn);
         btn.setText("Edit Tracking");
 
+        tw = new onTextChangedListener(tId,text);
+
+        text.addTextChangedListener(tw);
+
+
+
+
+        //spinner
+
+
         List<String> datetime = TrackingManager.getAllTime();
+
 
         startTime = findViewById(R.id.startTime);
         ArrayAdapter<String> spinneradapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, datetime);
@@ -49,12 +71,16 @@ public class EditTrackingActivity extends AppCompatActivity {
 
         startTime.setAdapter(spinneradapter);
         startTime.setSelection(spinneradapter.getPosition(sT));
+        startTime.setOnItemSelectedListener(new onEditViewStartTimeSpinner(tId));
 
 
         endtime = findViewById(R.id.endTime);
         endtime.setAdapter(spinneradapter);
         endtime.setSelection(spinneradapter.getPosition(eT));
+        endtime.setOnItemSelectedListener(new OnEditViewEndTimeSpinner(tId));
 
-        btn.setOnClickListener(new OnEditTrackingButtonClickedListener(this,name,sT,eT,tId));
+        btn.setOnClickListener(new OnEditTrackingButtonClickedListener(this,tId));
     }
+
+
 }

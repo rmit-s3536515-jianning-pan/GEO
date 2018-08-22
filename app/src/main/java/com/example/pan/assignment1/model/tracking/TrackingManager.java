@@ -6,7 +6,9 @@ import com.example.pan.assignment1.service.TrackingService;
 import java.text.DateFormat;
 import java.util.ArrayList;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class TrackingManager {
 
@@ -44,6 +46,7 @@ public class TrackingManager {
             System.out.println("Time : "+ sDate );
             dateTime.add(sDate);
         }
-        return dateTime;
+        Set<String> set = new HashSet<>(dateTime);
+         return dateTime;
     }
 }
