@@ -48,6 +48,7 @@ public class TrackableListAdapter extends RecyclerView.Adapter<TrackableListAdap
         viewHolder.description.setText("Description : " +item.getDescription());
         viewHolder.url.setText("URL : " + item.getUrl());
 
+        //Click to add tracking
         viewHolder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,16 +57,16 @@ public class TrackableListAdapter extends RecyclerView.Adapter<TrackableListAdap
                 intent.putExtra("TrackableId",Integer.toString(item.getId()));
 
                 context.startActivity(intent);
-//                Toast.makeText(context,"test",Toast.LENGTH_SHORT).show();
             }
         });
+
         viewHolder.view.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                    TrackingManager.displayRoute(item.getId());
                    return true;
             }
-        });
+        }); // long click to show route information
     }
 
     @Override

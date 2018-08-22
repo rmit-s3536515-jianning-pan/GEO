@@ -26,7 +26,7 @@ import java.util.Date;
 import java.util.List;
 
 public class AddTracking extends AppCompatActivity {
-//    private Context context =getApplicationContext();
+
     private EditText et;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +39,6 @@ public class AddTracking extends AppCompatActivity {
 
     private void init(){
         final String extra = getIntent().getStringExtra("TrackableId");
-        TextView tv = findViewById(R.id.addTextView);
-        tv.setText(extra);
 
         et = findViewById(R.id.trackingNameField);
 
@@ -80,7 +78,6 @@ public class AddTracking extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(),TrackingList.class);
                 startActivity(intent);
-                Toast.makeText(getApplicationContext(),"TEST",Toast.LENGTH_SHORT).show();
             }
         });
 
