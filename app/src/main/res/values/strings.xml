@@ -10,6 +10,11 @@
     <string name="addButton">Add Tracking</string>
 
 
+    <!--input validation -->
+    <string name="add_title_error">You have to fill the title First!!!!</string>
+    <string name="title_duplicate_error">Try different Title name, seems to be another title name already exists</string>
+
+
     <string name="trackableName">Name :</string>
     <string name="category">Cagtgory :</string>
     <string name="description">Description :</string>
