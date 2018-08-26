@@ -9,6 +9,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,7 +20,14 @@ public class TrackingManager {
 
     public static DateFormat dateformat = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM);
 
+    // Sort the array by start time
     public static List<Tracking> getTrackingList(){
+        Collections.sort(trackingList, new Comparator<Tracking>() {
+            @Override
+            public int compare(Tracking o1, Tracking o2) {
+                return o1.getTargetStartTime().compareTo(o2.getTargetStartTime());
+            }
+        });
         return trackingList;
     }
 
@@ -29,7 +37,7 @@ public class TrackingManager {
             List<Tracking> t = TrackingService.getSingletonInstance(MainActivity.getContext()).getTrackingList();;
 
             for(Tracking tr : t){
-                if(tr.getTrackableId() == id){
+                if(tr.getTrackableId() == id && tr.getStopTime()!=0){
                     Log.i(TAG,tr.toString());
                 }
             }
@@ -40,14 +48,14 @@ public class TrackingManager {
     }
 
     public static List<String> getAllTime(){
-//        String datetime = "05/07/2018 1:0:00 PM";
+
         List<String> dateTime = new ArrayList<>();
 
         List<Tracking> trackings = TrackingService.getSingletonInstance(MainActivity.getContext()).getTrackingList();
-//        System.out.println("SIZE " + trackings.size());
+
         for(Tracking t : trackings){
             String sDate = dateformat.format(t.getTargetStartTime());
-//            System.out.println("Time : "+ sDate );
+
             dateTime.add(sDate);
         }
         Set<String> set = new HashSet<>(dateTime);
