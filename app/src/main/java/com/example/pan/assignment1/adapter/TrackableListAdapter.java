@@ -11,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pan.assignment1.R;
+import com.example.pan.assignment1.controller.OnClickToAddTrackingActivity;
+import com.example.pan.assignment1.controller.OnLongClickToDisplayRoute;
 import com.example.pan.assignment1.model.trackable.Trackable;
 
 import com.example.pan.assignment1.model.tracking.TrackingManager;
@@ -48,25 +50,11 @@ public class TrackableListAdapter extends RecyclerView.Adapter<TrackableListAdap
         viewHolder.description.setText("Description : " +item.getDescription());
         viewHolder.url.setText("URL : " + item.getUrl());
 
-        //Click to add tracking
-        viewHolder.view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, AddTracking.class);
-                System.out.println("Id "+ item.getId());
-                intent.putExtra("TrackableId",Integer.toString(item.getId()));
+        int trackableID = item.getId();
+        //Click to go to add tracking activity
+        viewHolder.view.setOnClickListener(new OnClickToAddTrackingActivity(context,trackableID));
 
-                context.startActivity(intent);
-            }
-        });
-
-        viewHolder.view.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                   TrackingManager.displayRoute(item.getId());
-                   return true;
-            }
-        }); // long click to show route information
+        viewHolder.view.setOnLongClickListener(new OnLongClickToDisplayRoute(trackableID)); // long click to show route information
     }
 
     @Override

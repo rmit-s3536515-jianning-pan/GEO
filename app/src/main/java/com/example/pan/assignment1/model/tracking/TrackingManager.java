@@ -1,5 +1,7 @@
 package com.example.pan.assignment1.model.tracking;
 
+import android.util.Log;
+
 import com.example.pan.assignment1.MainActivity;
 import com.example.pan.assignment1.service.TrackingService;
 
@@ -21,13 +23,14 @@ public class TrackingManager {
         return trackingList;
     }
 
+    private static final String TAG = TrackingManager.class.getName();
+
     public static void displayRoute(int id){
             List<Tracking> t = TrackingService.getSingletonInstance(MainActivity.getContext()).getTrackingList();;
 
             for(Tracking tr : t){
                 if(tr.getTrackableId() == id){
-                    System.out.println(tr);
-
+                    Log.i(TAG,tr.toString());
                 }
             }
     }
@@ -41,10 +44,10 @@ public class TrackingManager {
         List<String> dateTime = new ArrayList<>();
 
         List<Tracking> trackings = TrackingService.getSingletonInstance(MainActivity.getContext()).getTrackingList();
-        System.out.println("SIZE " + trackings.size());
+//        System.out.println("SIZE " + trackings.size());
         for(Tracking t : trackings){
             String sDate = dateformat.format(t.getTargetStartTime());
-            System.out.println("Time : "+ sDate );
+//            System.out.println("Time : "+ sDate );
             dateTime.add(sDate);
         }
         Set<String> set = new HashSet<>(dateTime);

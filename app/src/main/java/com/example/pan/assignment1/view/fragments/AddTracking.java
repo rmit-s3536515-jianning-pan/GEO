@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pan.assignment1.R;
+import com.example.pan.assignment1.controller.OnClickAddTrackingListener;
 import com.example.pan.assignment1.controller.OnSpinnerItemSelectedListener;
 import com.example.pan.assignment1.model.tracking.MeelEvent;
 import com.example.pan.assignment1.model.tracking.Tracking;
@@ -38,48 +39,24 @@ public class AddTracking extends AppCompatActivity {
 
 
     private void init(){
-        final String extra = getIntent().getStringExtra("TrackableId");
+        String extra = getIntent().getStringExtra("TrackableId");
 
         et = findViewById(R.id.trackingNameField);
 
         List<String> datetime = TrackingManager.getAllTime(); //get the list of time and date
 
-        final Spinner startTime = findViewById(R.id.startTime);
+        Spinner startTime = findViewById(R.id.startTime);
         ArrayAdapter<String> spinneradapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,datetime);
         spinneradapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         startTime.setAdapter(spinneradapter);
 //        startTime.setSelection(spinneradapter.getPosition(datetime.get(4).toString()));
 
-        final Spinner endTime = findViewById(R.id.endTime);
+        Spinner endTime = findViewById(R.id.endTime);
         endTime.setAdapter(spinneradapter);
 
         Button addBtn = findViewById(R.id.addBtn);
-        addBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
 
-
-                    Date startDate = TrackingManager.dateformat.parse(startTime.getSelectedItem().toString());
-                    Date endDate = TrackingManager.dateformat.parse(endTime.getSelectedItem().toString());
-
-                    Tracking t = new MeelEvent();
-                    t.setTitle(et.getText().toString());
-                    t.setTargetStartTime(startDate);
-                    t.setTargetEndTime(endDate);
-                    t.setTrackableId(Integer.parseInt(extra));
-                    TrackingManager.addTracking(t);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-
-
-
-
-                Intent intent = new Intent(getApplicationContext(),TrackingList.class);
-                startActivity(intent);
-            }
-        });
+        addBtn.setOnClickListener(new OnClickAddTrackingListener(this,startTime,endTime,et,extra));
 
     }
 }
