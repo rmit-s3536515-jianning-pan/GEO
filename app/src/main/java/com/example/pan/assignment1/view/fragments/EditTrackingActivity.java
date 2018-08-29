@@ -51,6 +51,8 @@ public class EditTrackingActivity extends AppCompatActivity {
 
         text = findViewById(R.id.trackingNameField);
         text.setText(name);
+        text.setSelection(text.getText().length()); // make the cursor to the end
+
         btn = findViewById(R.id.addBtn);
         btn.setText("Edit Tracking");
 
@@ -86,7 +88,7 @@ public class EditTrackingActivity extends AppCompatActivity {
         meetTime.setSelection(spinneradapter.getPosition(meet));
         meetTime.setOnItemSelectedListener(new OnEditViewMeetTimeSpinner(tId));
 
-        btn.setOnClickListener(new OnEditTrackingButtonClickedListener(this,tId));
+        btn.setOnClickListener(new OnEditTrackingButtonClickedListener(this,tId,text));
     }
 
 

@@ -67,5 +67,16 @@ public class TrackableManager {
 
     }
 
+    public static String getName(int ID){
+        String name = "";
+        for(Trackable t : trackables){
+            if(t.getId() == ID){
+                name = t.getName();
+                break;
+            }
+        }
+        return name;
+    }
+
 
 }

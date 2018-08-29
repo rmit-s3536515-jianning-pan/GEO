@@ -32,13 +32,16 @@ public class onTextChangedListener implements TextWatcher{
 
     @Override
     public void afterTextChanged(Editable s) {
-            String value = s.toString();
+
+        String value = s.toString();
+
         et.removeTextChangedListener(this);
         et.setText(value);
-//            System.out.println("Title : "+ EditTrackingActivity.text.getText());
+        et.setSelection(et.getText().length());
+
         for(Tracking t : TrackingManager.getTrackingList()){
             if(t.getTrackingId().equals(id))
-//                System.out.println("Title text Id : " + id );
+
                 t.setTitle(value);
         }
         et.addTextChangedListener(this);

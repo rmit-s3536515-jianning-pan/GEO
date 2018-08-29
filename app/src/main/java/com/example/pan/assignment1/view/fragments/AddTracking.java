@@ -42,6 +42,7 @@ public class AddTracking extends AppCompatActivity {
         String extra = getIntent().getStringExtra("TrackableId");
 
         et = findViewById(R.id.trackingNameField);
+        et.setSelection(et.getText().length());
 
         List<String> datetime = TrackingManager.getAllTime(); //get the list of time and date
 
