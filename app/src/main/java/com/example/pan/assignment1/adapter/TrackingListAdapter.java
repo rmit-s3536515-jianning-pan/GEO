@@ -28,6 +28,7 @@ public class TrackingListAdapter extends RecyclerView.Adapter<TrackingListAdapte
     public static final String sT = "StartTime";
     public static final String eT = "EndTime";
     public static final String ID = "ID";
+    public static final String meet = "meetTime";
     public TrackingListAdapter(Context context, List<Tracking> trackingDataset){
         this.context  = context;
         this.trackingDataset = trackingDataset;
@@ -46,13 +47,15 @@ public class TrackingListAdapter extends RecyclerView.Adapter<TrackingListAdapte
            Tracking t = trackingDataset.get(i);
            String sStartTime = TrackingManager.dateformat.format(t.getTargetStartTime());
            String sEndTime = TrackingManager.dateformat.format(t.getTargetEndTime());
+           String meet = TrackingManager.dateformat.format((t.getMeetTime()));
+
             viewHolder.title.setText("Title: " + t.getTitle());
         viewHolder.startTime.setText("Start Time:" + sStartTime );
         viewHolder.endTime.setText("End Time:" + sEndTime);
-        viewHolder.trackableName.setText("");
-        System.out.println("Title : " + t.getTitle());
-        System.out.println("Title Id  : " + t.getTrackingId());
-        viewHolder.view.setOnClickListener(new onTrackingItemClickedListener(context,t.getTitle(),sStartTime,sEndTime,t.getTrackingId()));  // pass to the edit tracking activity
+        viewHolder.trackableName.setText("Meet Time: " + meet );
+//        System.out.println("Title : " + t.getTitle());
+//        System.out.println("Title Id  : " + t.getTrackingId());
+        viewHolder.view.setOnClickListener(new onTrackingItemClickedListener(context,t.getTitle(),sStartTime,sEndTime,t.getTrackingId(),meet));  // pass to the edit tracking activity
         viewHolder.view.setOnLongClickListener(new OnLongClickToRemoveItem(trackingDataset,t,this)); // long click to remove Itemz
     }
 

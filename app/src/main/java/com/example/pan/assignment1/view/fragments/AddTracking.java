@@ -54,9 +54,12 @@ public class AddTracking extends AppCompatActivity {
         Spinner endTime = findViewById(R.id.endTime);
         endTime.setAdapter(spinneradapter);
 
+        Spinner meetTime = findViewById(R.id.meetTimeSpinner);
+        meetTime.setAdapter(spinneradapter);
+
         Button addBtn = findViewById(R.id.addBtn);
 
-        addBtn.setOnClickListener(new OnClickAddTrackingListener(this,startTime,endTime,et,extra));
+        addBtn.setOnClickListener(new OnClickAddTrackingListener(this,startTime,endTime,et,extra,meetTime));
 
     }
 }

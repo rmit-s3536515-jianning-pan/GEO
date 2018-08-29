@@ -13,13 +13,14 @@ public class onTrackingItemClickedListener implements View.OnClickListener {
     private String st;
     private String et;
     private String trackingId;
-
-    public onTrackingItemClickedListener(Context context, String title, String st, String et,String trackingId) {
+    private String meet;
+    public onTrackingItemClickedListener(Context context, String title, String st, String et,String trackingId,String meet) {
         this.context = context;
         this.title = title;
         this.st = st;
         this.et = et;
         this.trackingId = trackingId;
+        this.meet = meet;
     }
 
     @Override
@@ -29,6 +30,7 @@ public class onTrackingItemClickedListener implements View.OnClickListener {
         intent.putExtra(TrackingListAdapter.sT,st);
         intent.putExtra(TrackingListAdapter.eT,et);
         intent.putExtra(TrackingListAdapter.ID,trackingId);
+        intent.putExtra(TrackingListAdapter.meet,meet);
         context.startActivity(intent);
     }
 }

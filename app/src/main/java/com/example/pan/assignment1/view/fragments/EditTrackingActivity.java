@@ -17,6 +17,7 @@ import com.example.pan.assignment1.R;
 import com.example.pan.assignment1.adapter.TrackingListAdapter;
 import com.example.pan.assignment1.controller.OnEditTrackingButtonClickedListener;
 import com.example.pan.assignment1.controller.OnEditViewEndTimeSpinner;
+import com.example.pan.assignment1.controller.OnEditViewMeetTimeSpinner;
 import com.example.pan.assignment1.controller.onEditViewStartTimeSpinner;
 import com.example.pan.assignment1.controller.onTextChangedListener;
 import com.example.pan.assignment1.model.tracking.Tracking;
@@ -30,6 +31,7 @@ public class EditTrackingActivity extends AppCompatActivity {
     private Button btn;
     private Spinner startTime;
     private Spinner endtime;
+    private Spinner meetTime;
     private onTextChangedListener tw;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,7 @@ public class EditTrackingActivity extends AppCompatActivity {
         String sT = ref.getStringExtra(TrackingListAdapter.sT);
         String eT = ref.getStringExtra(TrackingListAdapter.eT);
         String tId = ref.getStringExtra("ID");
-
+        String meet = ref.getStringExtra(TrackingListAdapter.meet);
 
         text = findViewById(R.id.trackingNameField);
         text.setText(name);
@@ -78,6 +80,11 @@ public class EditTrackingActivity extends AppCompatActivity {
         endtime.setAdapter(spinneradapter);
         endtime.setSelection(spinneradapter.getPosition(eT));
         endtime.setOnItemSelectedListener(new OnEditViewEndTimeSpinner(tId));
+
+        meetTime = findViewById(R.id.meetTimeSpinner);
+        meetTime.setAdapter(spinneradapter);
+        meetTime.setSelection(spinneradapter.getPosition(meet));
+        meetTime.setOnItemSelectedListener(new OnEditViewMeetTimeSpinner(tId));
 
         btn.setOnClickListener(new OnEditTrackingButtonClickedListener(this,tId));
     }

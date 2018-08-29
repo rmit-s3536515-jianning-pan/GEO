@@ -27,13 +27,14 @@ public class OnClickAddTrackingListener implements OnClickListener{
     private Spinner endTime;
     private EditText et;
     private String extra;
-
-    public OnClickAddTrackingListener(Context context, Spinner startTime, Spinner endTime, EditText et, String extra) {
+    private Spinner meet;
+    public OnClickAddTrackingListener(Context context, Spinner startTime, Spinner endTime, EditText et, String extra,Spinner meet) {
         this.context = context;
         this.startTime = startTime;
         this.endTime = endTime;
         this.et = et;
         this.extra = extra;
+        this.meet = meet;
     }
 
     @Override
@@ -43,12 +44,13 @@ public class OnClickAddTrackingListener implements OnClickListener{
 
                 Date startDate = TrackingManager.dateformat.parse(startTime.getSelectedItem().toString());
                 Date endDate = TrackingManager.dateformat.parse(endTime.getSelectedItem().toString());
-
+                Date meetTime = TrackingManager.dateformat.parse(meet.getSelectedItem().toString());
                 Tracking t = new MeelEvent();
                 t.setTitle(et.getText().toString());
                 t.setTargetStartTime(startDate);
                 t.setTargetEndTime(endDate);
                 t.setTrackableId(Integer.parseInt(extra));
+                t.setMeetTime(meetTime);
                 TrackingManager.addTracking(t);
             } catch (ParseException e) {
                 e.printStackTrace();
